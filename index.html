@@ -2,7 +2,8 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#18488C">
 <title>نموذج التسجيل | إرشاد</title>
 <meta name="description" content="نموذج التسجيل - مؤسسة إرشاد">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,10 +18,12 @@
   --radius:14px;
 }
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%}
+img{max-width:100%}
 html{scroll-behavior:smooth}
 body{
   margin:0; background:var(--blue-5); color:var(--ink);
-  font-family:"Alexandria",Tahoma,"Segoe UI",system-ui,sans-serif; line-height:1.8; font-size:16px;
+  font-family:"Alexandria",Tahoma,"Segoe UI",system-ui,sans-serif; line-height:1.8; font-size:16px; overflow-x:clip; -webkit-tap-highlight-color:transparent;
 }
 .hero{
   position:relative; overflow:hidden; background:var(--blue); color:#fff;
@@ -57,7 +60,8 @@ main{max-width:860px; margin:0 auto; padding:26px 16px 60px}
   flex:none; width:38px; height:38px; border-radius:50%; background:var(--gold); color:#1b2433;
   display:grid; place-items:center; font-weight:700; font-size:17px;
 }
-.grid{display:grid; grid-template-columns:1fr 1fr; gap:0 20px}
+.grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:0 20px}
+.field,.card,.course{min-width:0}
 .full{grid-column:1/-1}
 .field{margin-bottom:20px}
 label,.lbl{display:block; font-weight:600; font-size:15px; margin-bottom:6px; color:var(--ink)}
@@ -65,7 +69,7 @@ label,.lbl{display:block; font-weight:600; font-size:15px; margin-bottom:6px; co
 .hint{display:block; font-weight:400; font-size:13px; color:var(--muted); margin-top:-2px; margin-bottom:6px}
 input[type=text],input[type=email],input[type=tel],input[type=url],input[type=number],textarea{
   width:100%; font:inherit; color:inherit; background:#fff;
-  border:1.5px solid var(--line); border-radius:10px; padding:11px 14px; transition:border-color .15s, box-shadow .15s;
+  font-size:16px; min-height:46px; -webkit-appearance:none; appearance:none; border:1.5px solid var(--line); border-radius:10px; padding:11px 14px; transition:border-color .15s, box-shadow .15s;
 }
 textarea{resize:vertical; min-height:96px}
 .ltr{direction:ltr; text-align:right}
@@ -78,7 +82,7 @@ input:focus,textarea:focus{outline:none; border-color:var(--blue); box-shadow:0 
 .choice{position:relative}
 .choice input{position:absolute; opacity:0; inset:0; width:100%; height:100%; cursor:pointer; margin:0}
 .choice span{
-  display:block; padding:9px 18px; border:1.5px solid var(--line); border-radius:999px; font-weight:500; font-size:15px; background:#fff; transition:.15s;
+  display:block; padding:11px 22px; min-height:44px; border:1.5px solid var(--line); border-radius:999px; font-weight:500; font-size:15px; background:#fff; transition:.15s;
 }
 .choice input:checked+span{background:var(--blue); border-color:var(--blue); color:#fff}
 .choice input:focus-visible+span{box-shadow:0 0 0 4px rgba(24,72,140,.2)}
@@ -119,19 +123,49 @@ button{font:inherit; cursor:pointer; border:0; border-radius:12px; font-weight:7
 .success h2{margin:0 0 8px; color:var(--green); font-size:24px}
 
 footer{background:var(--blue); color:#fff; margin-top:10px; border-top:6px solid var(--gold)}
-.foot{max-width:860px; margin:0 auto; padding:26px 20px; display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; font-size:14.5px}
+.foot{max-width:860px; margin:0 auto; padding:26px 20px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px 24px; font-size:14.5px}
 .foot a{color:#fff; text-decoration:none}
 .foot a:hover{text-decoration:underline}
 .foot b{color:var(--gold)}
-.hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.hp{position:absolute; top:0; right:0; width:1px; height:1px; opacity:0; overflow:hidden; clip-path:inset(50%); pointer-events:none}
 
 @media (max-width:640px){
-  .grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:minmax(0,1fr)}
   .card{padding:20px 16px 6px}
   .logo{height:68px}
-  .foot{grid-template-columns:1fr}
+  .foot{grid-template-columns:minmax(0,1fr)}
   .btn{width:100%}
 }
+
+@media (max-width:900px){
+  main{padding:20px 14px 50px}
+  .hero{padding:32px 16px 48px}
+}
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .hero{padding:26px 14px 42px}
+  .hero-inner{gap:14px; justify-content:center; text-align:center}
+  .logo{height:60px}
+  .hero::before,.hero::after{opacity:.22}
+  main{padding:16px 10px 44px}
+  .card>h2{font-size:18px; gap:10px}
+  .num{width:34px; height:34px; font-size:15px}
+  .progress{padding:8px 14px; padding-top:max(8px, env(safe-area-inset-top))}
+  .progress-in{gap:10px; font-size:12.5px}
+  .choices{gap:8px}
+  .choice{flex:1 1 auto}
+  .choice span{text-align:center; padding:11px 14px}
+  details.lecture summary{padding:12px; font-size:15px}
+  .lecture-body{padding:4px 12px 8px}
+  #years{max-width:none !important}
+  .status .row .btn-ghost{width:100%}
+  .foot{padding:22px 16px calc(22px + env(safe-area-inset-bottom)); word-break:break-word}
+}
+@media (min-width:1100px){
+  main{max-width:920px}
+  .hero-inner,.progress-in,.foot{max-width:920px}
+}
+@media (hover:none){ .btn:hover{background:var(--blue)} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important; scroll-behavior:auto!important}}
 </style>
 </head>
@@ -291,9 +325,8 @@ footer{background:var(--blue); color:#fff; margin-top:10px; border-top:6px solid
 
 <footer>
   <div class="foot">
-    <div><b>الهاتف:</b> <a href="tel:01277700116" dir="ltr">01277700116</a> - <a href="tel:01150568068" dir="ltr">01150568068</a></div>
+    <div><b>الهاتف:</b> <a href="tel:00966595366763" dir="ltr">00966595366763</a> - <a href="tel:01100909181" dir="ltr">01100909181</a></div>
     <div><b>البريد:</b> <a href="mailto:info@ershadacademy.com">info@ershadacademy.com</a></div>
-    <div><b>العنوان:</b> مجاورة (بـ2) مدينة الشروق، القاهرة</div>
     <div><b>الموقع:</b> <a href="https://www.ershadacademy.com" target="_blank" rel="noopener">www.ershadacademy.com</a></div>
   </div>
 </footer>
@@ -301,7 +334,8 @@ footer{background:var(--blue); color:#fff; margin-top:10px; border-top:6px solid
 <script>
 /* ================== الإعدادات (غيّر البريد هنا فقط) ================== */
 const CONFIG = {
-  RECIPIENT_EMAIL: "ym763948@gmail.com",   // البريد المستلم
+  RECIPIENT_EMAIL: "ym763948@gmail.com",   // البريد المستلم الأساسي
+  CC_EMAILS: ["marketing@ershadacademy.com"], // نسخة تصل لنفس الإيميل
   SUBJECT_PREFIX: "طلب تسجيل جديد - إرشاد"
 };
 /* ===================================================================== */
@@ -487,6 +521,7 @@ form.addEventListener("submit", async ev=>{
   payload["_template"] = "table";
   payload["_captcha"] = "false";
   payload["_replyto"] = form.elements["email"].value.trim();
+  if(CONFIG.CC_EMAILS && CONFIG.CC_EMAILS.length) payload["_cc"] = CONFIG.CC_EMAILS.join(",");
 
   submitBtn.disabled = true; submitBtn.textContent = "جارٍ الإرسال...";
   statusBox.className = "status";
